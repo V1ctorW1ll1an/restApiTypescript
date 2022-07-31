@@ -8,9 +8,9 @@ type CreateUserRequest = {
 };
 
 class CreateUser {
-    constructor(private IUserRepository: IUserRepository) {}
+    constructor(private readonly userRepository: IUserRepository) {}
     async execute({ email, name, password }: CreateUserRequest): Promise<User> {
-        const userAlreadyExists = await this.IUserRepository.findByEmail(email);
+        const userAlreadyExists = await this.userRepository.findByEmail(email);
         if (userAlreadyExists) {
             throw new Error("User already exists.");
         }
